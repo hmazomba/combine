@@ -1,0 +1,4 @@
+email: thebest@users.com
+user name: superuser
+first name: The Best
+password: BEST@admin123
