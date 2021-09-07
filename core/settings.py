@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'blog_api',
     'rest_framework',
     'corsheaders', 
-    'users'
+    'users',
+    'rest_framework_simplejwt.token_blacklist',
 ]
 
 MIDDLEWARE = [
@@ -157,7 +158,7 @@ SIMPLE_JWT = {
     'UPDATE_LAST_LOGIN': False,
 
     'ALGORITHM': 'HS256',
-    'SIGNING_KEY': settings.SECRET_KEY,
+    'SIGNING_KEY': SECRET_KEY,
     'VERIFYING_KEY': None,
     'AUDIENCE': None,
     'ISSUER': None,
