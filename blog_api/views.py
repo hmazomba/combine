@@ -3,9 +3,8 @@ from blog.models import Post
 from .serializers import PostSerializer
 from rest_framework.permissions import SAFE_METHODS, IsAuthenticatedOrReadOnly, BasePermission, IsAdminUser, DjangoModelPermissions
 from rest_framework  import viewsets
-from rest_framework import filter
-from django.sshortcuts import get_object_or_404
-from rest_framework.response import Repsonse
+from django.shortcuts import get_object_or_404
+from rest_framework.response import Response
 
 class PostUserWritePermission(BasePermission):
     message = 'Editing posts is restricted to the author only.'
