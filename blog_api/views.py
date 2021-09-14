@@ -52,12 +52,22 @@ class PostSearch(generics.ListAPIView):
     
     
     
+class CreatePost(generics.CreateAPIView):
+    permission_classes = [IsAuthenticated]
+    queryest = Post.objects.all()
+    serializer_class = PostSerializer
     
+class AdminPostDetail(generics.RetrieveAPIView):
+    permission_classes = [IsAuthenticated]
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
     
-        
-    """ 
-        Alternate Method. Uses url
-    def get_queryset(self):
-        slug = self.kwargs['pk']
-        print(slug)
-        return Post.objects.filter(slug=slug) """
+class EditPost(generics.UpdateAPIView):
+    permission_classes = [IsAuthenticated]
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    
+class DeletePost(generics.UpdateAPIView):
+    permission_classes = [IsAuthenticated]
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer        
