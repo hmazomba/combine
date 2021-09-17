@@ -6,6 +6,9 @@ from rest_framework  import viewsets
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework import filters
+from rest_framework import status
+from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.views import APIView
 
 class PostUserWritePermission(BasePermission):
     message = 'Editing posts is restricted to the author only.'
@@ -51,11 +54,25 @@ class PostSearch(generics.ListAPIView):
     
     
     
-    
+""" 
 class CreatePost(generics.CreateAPIView):
     permission_classes = [IsAuthenticated]
     queryest = Post.objects.all()
-    serializer_class = PostSerializer
+    serializer_class = PostSerializer """
+    
+class CreatePost(APIView):
+    permission_classes = [IsAuthenticated]
+    parser_classes = [MultiPartParser, FormParser]
+    
+    def post(self, request, format=None):
+         print(request.data)
+         serializer = PostSerializer(data=request.data)
+         if serializer.is_valid():
+             serializer.save()
+             return Response(serializer.data , status=status.HTTP_200_OK)
+         else:
+             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)   
+    
     
 class AdminPostDetail(generics.RetrieveAPIView):
     permission_classes = [IsAuthenticated]
