@@ -135,8 +135,13 @@ STATIC_URL = '/static/'
 # IsAuthenticatedOrReadOnly
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000"
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
@@ -166,8 +171,9 @@ AUTHENTICATION_BACKENDS = (
 )
 
 #Facebook configuration
-SOCIAL_AUTH_FACEBOOK_KEY = '553599792641889'
-SOCIAL_AUTH_FACEBOOK_SECRET = '2683ad06c23a66fbcd0f75cc84c73fb1'
+SOCIAL_AUTH_FACEBOOK_KEY = ('553599792641889')
+SOCIAL_AUTH_FACEBOOK_SECRET = ('2683ad06c23a66fbcd0f75cc84c73fb1')
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'http://localhost:3000/'
 
 # Define SOCIAL_AUTH_FACEBOOK_SCOPE to get extra permissions from Facebook.
 # Email is not sent by default, to get it, you must request the email permission.
@@ -175,6 +181,7 @@ SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
     'fields': 'id, name, email'
 }
+SOCIAL_AUTH_USER_FIELDS = ['email', 'username', 'first_name', 'password']
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
